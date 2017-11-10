@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Todulist</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <style>
+        *{
+            margin:0;padding:0;
+        }
+        @media screen and (min-width:375px){
+            html{
+                font-size: 50px;
+            }
+        }
+        html{
+            font-size:100px;
+            height:100%;
+        }
+
+        body{
+            background-color: #ccc;
+            width:100%;
+            height: 100%;
+            overflow: hidden;
+            font-size: 16px;
+        }
+        .swiper-container {
+            height:3rem;
+        }
+        .btnbox{
+            width: 100%;
+            height: 1rem;
+            /*background-color: #fff;*/
+            margin-top:.2rem;
+            display: flex;
+            justify-content: space-around;
+            font-size: .2rem;
+        }
+        .btnbox div{
+            width: 30%;
+            height: 1rem;
+            /*float:left;*/
+            border:1px solid #333;
+            border-radius:0.2rem;
+            background-color: #fff;
+            text-align: center;
+            line-height: 1rem;
+
+
+        }
+        .wait.active{
+            background-color: #900;
+            color:#fff;
+        }
+        .done.active{
+            background-color: #090;
+            color:#fff;
+        }
+        #add{
+            width: 100%;
+            height: 1rem;
+            position: fixed;
+            /*top:*/
+            left:0;
+            bottom:0;
+            background-color: orange;
+            color:#fff;
+            text-align: center;
+            line-height: 1rem;
+            /*position: absolute;*/
+        }
+        .content{
+            width: 100%;
+            background-color: #fff;
+            height:calc(100% - 5.2rem);
+
+        }
+        .content li{
+            height: 1rem;
+            margin: 0.2rem 0;
+            background-color: red;
+            display: flex;
+        }
+        #editarea{
+            width: 6rem;
+            height: 6rem;
+            border:2px solid red;
+            position: absolute;
+            top:0;
+            right:0;
+            left:0;
+            bottom:1rem;
+            margin:auto;
+            background-color: #fff;
+            border-radius: .2rem;
+
+        }
+        #editarea textarea{
+            width: 100%;
+            height: 75%;
+            resize: none;
+            pading:0.3rem;
+
+        }
+        #editarea textarea:focus{
+
+        }
+        #editarea input{
+            width: 80%;
+            height: 20%;
+            text-align: center;
+            display: block;
+            margin:0 auto;
+            background-color: blue;
+            border-radius: .2rem;
+            border:none;
+            z-index:3;
+
+
+        }
+        #main{
+            width: 100%;
+            height: 100%;
+            /*position: absolute;*/
+            /*top:0;*/
+            /*left:0;*/
+            filter: blur(2px);
+            /*z-index:10;*/
+            /*background-color:rgba(0,0,0,.5);*/
+        }
+        /*.mask{*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*position: absolute;*/
+            /*top:0;*/
+            /*left:0;*/
+            /*!*filter: blur(2px);*!*/
+            /*z-index:5;*/
+            /*background-color:rgba(0,0,0,.5);*/
+        /*}*/
+        @keyframes show {
+            0%{
+                transform: scale(0.5,0.5);
+            }
+            100%{
+                transform: scale(1,1);
+
+            }
+
+        }
+        .show{
+            animation: show .5s linear;
+            display: block;
+
+        }
+    </style>
+</head>
+<body>
+<div id="main"></div>
+<div class="mask"></div>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+
+</div>
+    <div class="btnbox">
+        <div class="wait active">未完成</div>
+        <div class="done">已经=完成</div>
+    </div>
+
+    <div class="content">
+        <ul>
+            <li>
+                <input type="checkbox">
+                <time>2017-11-02 16:00:00</time>
+                <p>今天的作业是xxxxx</p>
+                <i>0</i>
+                 </li>
+        </ul>
+
+    </div>
+<div id="editarea">
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <input type="button" value="提交" id="submit">
+</div>
+<div id="add">添加</div>
+
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/rem.js"></script>
+
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+//        direction: 'vertical',
+        loop: true,
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    })
+
+    $(".btnbox div")
+            .click(function(){
+                $(".btnbox div").removeClass("active").filter(this).addClass("active")
+                
+            })
+
+    function getData(){
+        return localStorage.todu?JSON.parse(localStorage.todu):[]
+    }
+    function saveData(data){
+        localStorage.todu=JSON.Stringify(data)
+    }
+
+
+$("#add").click(function(){
+    $("main").css("filter","blur(2px)")
+    $(".mask").show().find("#editarea").delay(500).queue(function(){
+        $(this).addClass("show").dequeue();
+    })
+    $("#text")[0].focus()
+})
+
+
+$("#submit").click(function(){
+    var text=$("#text").val();
+    if(text===""){
+        return;
+    }
+    $("#text").val=""
+    var time=new Date().getTime();
+    var data=getData()
+    data.push({con:text,time,isStar:0,isDone:0,})
+    saveData(data);
+    $("ieditarea").removeClass("show")
+            .parent()
+            .hide()
+            .prev()
+            .css("fliter","")
+
+})
+
+$("#close").click(function(){
+    $("ieditarea").removeClass("show")
+            .parent()
+            .hide()
+            .prev()
+            .css("fliter","")
+})
+
+function rewrite(){
+    var data=getData()
+    $(".content ul").empty();
+    var str=""
+    $.each(data,function(index,val){
+        str+="<li> <input type="checkbox"><time>2017-11-02 16:00:00</time><p>"+val.con+"</p><i>0</i></li>"
+        $(".content ul").html(str)
+    })
+}
+
+    rewrite()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

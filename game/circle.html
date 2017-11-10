@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+
+        }
+        .container{
+            width: 800px;
+            height: 200px;
+            border:1px solid red;
+            display: flex;
+            justify-content: space-between;
+            margin:1000px auto;
+
+        }
+        canvas{
+            background-color:#ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <canvas width="200" height="200" id="canvas1"></canvas>
+    <canvas width="200" height="200" id="canvas2"></canvas>
+    <canvas width="200" height="200" id="canvas3"></canvas>
+</div>
+
+</body>
+<script>
+    let container=document.querySelector(".container")
+    let canvas1=document.querySelector("#canvas1")
+    let canvas2=document.querySelector("#canvas2")
+    let canvas3=document.querySelector("#canvas3")
+    let cobj1=canvas1.getContext("2d")
+    let cobj2=canvas2.getContext("2d")
+    let cobj3=canvas3.getContext("2d")
+    let flag=true;
+   function circle(canvas,max,color){
+//       let canvas=document.querySelector("canvas");
+       let cobj=canvas.getContext("2d");
+       cobj.save();
+       cobj.translate(100,100);
+       cobj.lineWidth=20;
+       cobj.textAlign="center";
+       cobj.textBaseline="middle";
+       cobj.lineCap="round";
+       cobj.strokeStyle=color;
+       cobj.font="20px 微软雅黑";
+       let num=0;
+       function fn(){
+           num++;
+           cobj.clearRect(-100,-100,200,200)
+           cobj.save()
+           cobj.rotate(-Math.PI/2)
+           let angel=num*Math.PI/50
+           cobj.beginPath();
+           cobj.arc(0,0,70,0,angel)
+           cobj.stroke()
+           cobj.restore()
+           cobj.fillText(num+"%",0,0)
+           if(num<max){
+               requestAnimationFrame(fn)
+           }else{
+               cobj.restore()
+           }
+       }
+       fn()
+   }
+    window.addEventListener("scroll",function(){
+        let obj=document.body.scrollTop==0?document.documentElement:document.body;
+        let st=obj.scrollTop;
+        if(st>400&&flag){
+            circle(canvas1,80,"red")
+            circle(canvas2,78,"yellow")
+            circle(canvas3,66,"green")
+            flag=false
+        }
+        if(st<container.offsetTop-window.innerHeight){
+            flag=true
+            cobj1.clearRect(0,0,200,200)
+            cobj2.clearRect(0,0,200,200)
+            cobj3.clearRect(0,0,200,200)
+        }
+    })
+
+
+
+</script>
+</html>

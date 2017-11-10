@@ -1,0 +1,228 @@
+
+
+/*十二栅格系统*/
+/*快速实现响应式布局*/
+/*每一个屏幕等比分成12分*/
+/*预定义类*/
+/*匹配：三种终端  四中屏幕个大小*/
+/*pc端大屏 screen 1200px          1170*/
+/*pc端小屏 992培训<screen<1200px   970px*/
+/*平板端： 768px <screen<992px     750*/
+/*手机端： screen<768px   */
+
+/*.container  固定宽度*/
+/*.container-fluid  100%宽度*/
+/*.row  行*/
+/*.col  列*/
+
+/*正常宽*/
+.container-fluid{
+    width:100%;
+    height:auto;
+    /*预防加浮动*/
+    overflow: hidden;
+}
+
+/*内宽*/
+.container{
+    height:auto;
+    overflow: hidden;
+    margin:0 auto;
+}
+
+/*完美清除浮动*/
+
+.container:before,.container:after,.row:before,.row:after{
+    content: "";
+    display: block;
+    width:0;
+    line-height:0;
+    clear: both;
+}
+
+.row{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    padding:0 24px;
+}
+[class*="col-"]{
+    float:left;
+}
+
+/*PC端大屏*1200px  1170px*/
+@media screen and (min-width:1170px){
+    .container{
+        width:1170px;
+    }
+    .col-lg-1{
+        width:8.333333%;
+    }
+    .col-lg-2{
+        width:16.666666%;
+    }
+    .col-lg-3{
+        width:25%;
+    }
+    .col-lg-4{
+        width:33.333333%;
+    }
+    .col-lg-5{
+        width:41.666666%;
+    }
+    .col-lg-6{
+        width:50%;
+    }
+    .col-lg-7{
+        width:58.333333%;
+    }
+    .col-lg-8{
+        width:66.666666%;
+    }
+    .col-lg-9{
+        width:75%;
+    }
+    .col-lg-10{
+        width:83.333333%;
+    }
+    .col-lg-11{
+        width:91.666666%;
+    }
+    .col-lg-12{
+        width:100%;
+    }
+
+
+}
+/*PC端小屏  992~1200  970px    md   */
+@media screen and (min-width:992px) and (max-width:1200px){
+    .container {
+        width: 970px;
+    }
+    .col-md-1{
+        width:8.333333%;
+    }
+    .col-md-2{
+        width:16.666666%;
+    }
+    .col-md-3{
+        width:25%;
+    }
+    .col-md-4{
+        width:33.333333%;
+    }
+    .col-md-5{
+        width:41.666666%;
+    }
+    .col-md-6{
+        width:50%;
+    }
+    .col-md-7{
+        width:58.333333%;
+    }
+    .col-md-8{
+        width:66.666666%;
+    }
+    .col-md-9{
+        width:75%;
+    }
+    .col-md-10{
+        width:83.333333%;
+    }
+    .col-md-11{
+        width:91.666666%;
+    }
+    .col-md-12{
+        width:100%;
+    }
+
+
+}
+/*ipad端    768px~992   750 sm  */
+@media screen and (min-width:768px) and (max-width:992px) {
+    .container {
+        width: 750px;
+
+    }
+
+    .col-sm-1{
+        width:8.333333%;
+    }
+    .col-sm-2{
+        width:16.666666%;
+    }
+    .col-sm-3{
+        width:25%;
+    }
+    .col-sm-4{
+        width:33.333333%;
+    }
+    .col-sm-5{
+        width:41.666666%;
+    }
+    .col-sm-6{
+        width:50%;
+    }
+    .col-sm-7{
+        width:58.333333%;
+    }
+    .col-sm-8{
+        width:66.666666%;
+    }
+    .col-sm-9{
+        width:75%;
+    }
+    .col-sm-10{
+        width:83.333333%;
+    }
+    .col-sm-11{
+        width:91.666666%;
+    }
+    .col-sm-12{
+        width:100%;
+    }
+
+}
+
+/*!*手机端  <768*!   xs*/
+@media screen and (max-width:768px){
+    .container{
+        padding:0 24px;
+    }
+    .col-xs-1{
+        width:8.333333%;
+    }
+    .col-xs-2{
+        width:16.666666%;
+    }
+    .col-xs-3{
+        width:25%;
+    }
+    .col-xs-4{
+        width:33.333333%;
+    }
+    .col-xs-5{
+        width:41.666666%;
+    }
+    .col-xs-6{
+        width:50%;
+    }
+    .col-xs-7{
+        width:58.333333%;
+    }
+    .col-xs-8{
+        width:66.666666%;
+    }
+    .col-xs-9{
+        width:75%;
+    }
+    .col-xs-10{
+        width:83.333333%;
+    }
+    .col-xs-11{
+        width:91.666666%;
+    }
+    .col-xs-12{
+        width:100%;
+    }
+}

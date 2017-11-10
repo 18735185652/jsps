@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas{
+          /*border:1px solid red;*/
+          margin:100px auto;
+          display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas height="500" width="500"></canvas>
+</body>
+<script>
+    let canvas=document.querySelector("canvas");
+    let cobj=canvas.getContext("2d");
+    cobj.save();
+    cobj.translate(250,250);
+function draw(){
+    cobj.lineWidth=4;
+    cobj.beginPath();
+    cobj.arc(0,0,200,0,Math.PI/180*360)
+    cobj.stroke();
+
+    cobj.beginPath();
+    for(let i=0;i<60;i++){
+        let x=190;
+        if(i%5==0){
+            x=185;
+        }
+        cobj.save()
+        cobj.rotate(i * Math.PI / 30)   //i*Math.PI/180/(360/60)
+        cobj.beginPath()
+        cobj.moveTo(x,0)
+        cobj.lineTo(200,0)
+        cobj.restore()
+        cobj.stroke()
+    }
+    cobj.font="20px 黑体";
+    cobj.textAlign="center";
+    cobj.textBaseline="middle";
+    let numarr = ["XII", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"]
+    for(let i=0;i<12;i++){
+        let angle = i * Math.PI / 6 - Math.PI / 2;
+        let x = Math.cos(angle) * 170;
+        let y = Math.sin(angle) * 170;
+//        保存初始值
+        cobj.save();
+        cobj.translate(x,y)
+        cobj.fillText(numarr[i],0,0)
+//        重置初始值
+        cobj.restore();
+    }
+}
+    draw();
+    function fn(ha,ma,sa){
+        cobj.save();
+        cobj.beginPath();
+        cobj.lineWidth=8;
+        cobj.rotate(ha)
+        cobj.moveTo(0,0)
+        cobj.lineTo(0, -120)
+        cobj.stroke()
+
+        cobj.beginPath();
+        cobj.lineWidth=6;
+        cobj.rotate(ma)
+        cobj.moveTo(0,0)
+        cobj.lineTo(0,-140)
+        cobj.stroke()
+
+        cobj.beginPath();
+        cobj.lineWidth=4;
+        cobj.rotate(sa)
+        cobj.strokeStyle="red"
+        cobj.moveTo(0,0)
+        cobj.lineTo(0,-160)
+        cobj.stroke()
+        cobj.restore()
+    }
+
+function getTime(){
+    let date=new Date()
+    let h=date.getHours()
+    let m=date.getMinutes()
+    let s=date.getSeconds()
+    fn(h * Math.PI / 6 + m * Math. PI / 360, m * Math.PI / 30, s * Math.PI / 30)
+}
+
+setInterval(function(){
+    cobj.clearRect(-250,-250,500,500)
+    getTime()
+    draw()
+},1000)
+
+</script>
+</html>

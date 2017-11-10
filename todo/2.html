@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Todulist</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 100px;
+            height: 100%;
+        }
+
+        @media screen and (min-width: 375px) {
+            html {
+                font-size: 50px;
+            }
+        }
+
+
+
+        body {
+            background-color: #ccc;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-size: 16px;
+        }
+
+        .swiper-container {
+            height: 3rem;
+        }
+
+        @keyframes show {
+            0% {
+                transform: scale(0.5, 0.5);
+            }
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        #add {
+            width: 100%;
+            height: 1rem;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background-color: orangered;
+            color: #fff;
+            text-align: center;
+            line-height: 1rem;
+        }
+
+        .btnbox {
+            width: 100%;
+            height: 1rem;
+            /*background-color: #fff;*/
+            margin-top: .2rem;
+            display: flex;
+            justify-content: space-around;
+            font-size: .2rem;
+            font-size: .3rem;
+        }
+
+        .btnbox div {
+            width: 30%;
+            height: 1rem;
+            /*float:left;*/
+            border: 1px solid #333;
+            border-radius: 0.2rem;
+            background-color: #fff;
+            text-align: center;
+            line-height: 1rem;
+        }
+
+        .wait.active {
+            background-color: #900;
+            color: #fff;
+        }
+
+        .done.active {
+            background-color: #090;
+            color: #fff;
+        }
+
+        .content {
+            width: 300%;
+            background-color: yellow;
+            height: calc(100% - 5.2rem);
+
+        }
+
+        .content li {
+            height: 1rem;
+            margin: 0.2rem 0;
+            background-color: red;
+            display: flex;
+            /*justify-content: space-between;*/
+        }
+
+        /*对话框*/
+        #editarea {
+            width: 6rem;
+            height: 6rem;
+            border: 2px solid red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 1rem;
+            margin: auto;
+            background-color: #fff;
+            border-radius: .2rem;
+            display: none;
+
+
+        }
+        #text {
+            border: 1px solid red;
+            width: 100%;
+            height: 75%;
+            resize: none;
+            padding: 0.3rem;
+            border: none;
+        }
+        #submit {
+            width: 100%;
+            height: 1rem;
+            display: block;
+            margin: 0 auto;
+            background-color: blue;
+            border: none;
+            font-size: .5rem;
+            text-align: center;
+            line-height: 1rem;
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .8);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: none;
+        }
+        #main{
+            width: 100%;
+            height: 100%;
+            /*filter: blur(2px);*/
+        }
+        @keyframes show {
+            0%{
+                transform: scale(0.5,0.5);
+            }
+            100%{
+                transform: scale(1,1);
+            }
+        }
+        .show{
+            animation: show .5s linear;
+            display: block!important;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <div class="btnbox">
+        <div class="wait active">未完成</div>
+        <div class="done">已完成</div>
+    </div>
+    <div class="content">
+        <ul>
+            <!--<li>-->
+            <!--<time>2017-11-02 16:00:00</time>-->
+            <!--<p>今天的作业是xx</p>-->
+            <!--<i>0</i>-->
+            <!--</li>-->
+        </ul>
+    </div>
+</div>
+
+<div class="mask">
+    <div id="editarea">
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <input type="button" value="提交" id="submit">
+    </div>
+</div>
+<div id="add">添加</div>
+
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/rem.js"></script>
+
+<script>
+    $(".btnbox div").click(function(){
+        $(".btnbox div").removeClass("active").filter(this).addClass("active")
+    })
+
+    $("#add").click(function(){
+        $("#main").css("filter","blur(2px)")
+        $(".mask").show().find("#editarea").delay(500).queue(function(){
+            $(this).addClass("show").clearQueue();
+            $("textarea")[0].focus()
+        })
+    })
+
+
+
+    function getData(){
+        return localStorage.todu?JSON.parse(localStorage.todu):[]
+    }
+
+    function saveData(data){
+        localStorage.todu=JSON.stringify(data)
+    }
+
+    $("#submit").click(function(){
+        var text=$("textarea").val()
+        if(text===""){
+            return;
+        }
+        $("textarea").val("");
+        var time=new Date().getTime()
+        var data=getData();
+        data.push({con:text,time,isStar:0,isDone:0})
+        saveData(data)
+        rewirte()
+
+        $("#editarea").removeClass("show").parent().hide().prev().css("filter","")
+
+
+
+
+    })
+
+
+
+    function rewirte(){
+        var data=getData();
+        $("#content").empty();
+        var str="";
+        $(data).each(function(index,val){
+            str+="<li><time>2017-11-02 16:00:00</time><p>"+val.con+"</p><i>0</i></li>"
+            $(".content ul").html(str)
+        })
+    }
+    rewirte()
+
+</script>
+</html>

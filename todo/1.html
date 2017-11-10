@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Todulist</title>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <style>
+        @font-face {
+            font-family: 'iconfont';  /* project id 403499 */
+            src: url('https://at.alicdn.com/t/font_403499_ewlsm1n9sn12a9k9.eot');
+            src: url('https://at.alicdn.com/t/font_403499_ewlsm1n9sn12a9k9.eot?#iefix') format('embedded-opentype'),
+            url('https://at.alicdn.com/t/font_403499_ewlsm1n9sn12a9k9.woff') format('woff'),
+            url('https://at.alicdn.com/t/font_403499_ewlsm1n9sn12a9k9.ttf') format('truetype'),
+            url('https://at.alicdn.com/t/font_403499_ewlsm1n9sn12a9k9.svg#iconfont') format('svg');
+        }
+        .iconfont {
+            font-family: "iconfont" !important;
+            font-size: 20px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: 0.2px;
+            -moz-osx-font-smoothing: grayscale;
+            color: #b0b0b0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 100px;
+            height: 100%;
+            width: 100%;
+        }
+        @media screen and (min-width: 375px) {
+            html {
+                font-size: 50px;
+            }
+        }
+        body {
+            background-color: #ccc;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-size: 16px;
+        }
+        .swiper-container {
+            height: 3rem;
+        }
+        @keyframes show {
+            0% {
+                transform: scale(0.5, 0.5);
+            }
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        #add {
+            width: 100%;
+            height: 1rem;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            background-color: orangered;
+            color: #fff;
+            text-align: center;
+            line-height: 1rem;
+        }
+        .btnbox {
+            width: 100%;
+            height: 1rem;
+            /*background-color: #fff;*/
+            margin-top: .2rem;
+            display: flex;
+            justify-content: space-around;
+            font-size: .2rem;
+            font-size: .3rem;
+        }
+        .btnbox div {
+            width: 30%;
+            height: 1rem;
+            /*float:left;*/
+            border: 1px solid #333;
+            border-radius: 0.2rem;
+            background-color: #fff;
+            text-align: center;
+            line-height: 1rem;
+        }
+        .wait.active {
+            background-color: #900;
+            color: #fff;
+        }
+
+        .done.active {
+            background-color: #090;
+            color: #fff;
+        }
+
+        .content {
+            width: 300%;
+            background-color: yellow;
+            height: calc(100% - 5.2rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content li {
+            height: 1rem;
+            width: 7.5rem;
+            margin: 0.2rem 0;
+            background-color: red;
+            display: flex;
+            position: relative;
+            /*justify-content: space-between;*/
+        }
+        .item {
+            width: 6rem;
+            height: 6rem;
+            border: 2px solid red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 1rem;
+            margin: auto;
+            background-color: #fff;
+            border-radius: .2rem;
+            display: none;
+            padding: .3rem;
+        }
+        .item p {
+            width: 1rem;
+            height: 1rem;
+            background: red;
+            position:absolute;
+            top: 0rem;
+            right: .2rem;
+            text-align:center;
+            color: #000;
+            line-height:.5rem;
+            z-index: 10000;
+        }
+
+        .right {
+            width: 2.5rem;
+            height: 1rem;
+            background: greenyellow;
+            text-align: center;
+            color: white;
+            font-size: .4rem;
+            line-height: 1rem;
+            position: absolute;
+            /*right:-2.5rem;*/
+            right: -2.5rem;
+            top: 0;
+        }
+        .del {
+            width: 2.5rem;
+            height: 1rem;
+            background: #00ffa3;
+            text-align: center;
+            color: white;
+            font-size: .3rem;
+            line-height: 1rem;
+            position: absolute;
+            right: -2.5rem;
+            top: 0;
+        }
+
+        /*对话框*/
+        #editarea {
+            width: 6rem;
+            height: 6rem;
+            border: 2px solid red;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 1rem;
+            margin: auto;
+            background-color: #fff;
+            border-radius: .2rem;
+            display: none;
+        }
+
+        #editarea .close {
+            color: #fff;
+            text-align: center;
+            line-height: .5rem;
+            font-size: .5rem;
+            width: .5rem;
+            height: .5rem;
+            background-color: pink;
+            position: absolute;
+            top: .2rem;
+            right: .2rem;
+        }
+
+        #text {
+            border: 1px solid red;
+            width: 100%;
+            height: 75%;
+            resize: none;
+            padding: 0.3rem;
+            border: none;
+        }
+
+        #submit {
+            width: 100%;
+            height: 1rem;
+            display: block;
+            margin: 0 auto;
+            background-color: blue;
+            border: none;
+            font-size: .5rem;
+            text-align: center;
+            line-height: 1rem;
+        }
+
+        .mask {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, .8);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: none;
+        }
+        #main {
+            width: 100%;
+            height: 100%;
+            /*filter: blur(2px);*/
+        }
+
+        @keyframes show {
+            0% {
+                transform: scale(0.5, 0.5);
+            }
+            100% {
+                transform: scale(1, 1);
+            }
+        }
+
+        .show {
+            animation: show .5s linear;
+            display: block !important;
+        }
+
+        .content ul li time {
+            width: 2.5rem;
+            height: 100%;
+            text-align: center;
+        }
+
+        .content ul li time span {
+            display: block;
+            margin-top: .05rem;
+        }
+
+        .content ul li p {
+            width: 4rem;
+            height: 100%;
+            line-height: 1rem;
+            /*word-break: break-all;*/
+            white-space:nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+        }
+
+        .content ul li i {
+            display: block;
+            font-size: .7rem;
+            line-height: 1rem;
+            margin-left: .15rem;
+            /*margin:0 auto;*/
+            /*width: 1rem;*/
+            /*height: 1rem;*/
+            /*float:right;*/
+        }
+        #wenzi{
+            width:90%;
+            height:70%;
+            padding:.3rem;
+            text-decoration: underline;
+            /*background-color: red;*/
+            position: absolute;
+            top:0;left:0;bottom:0;right:0;margin:auto;
+            display: block;
+        }
+        .shijian{
+            float:left;
+        }
+        .riqi{
+            float:left;
+            margin-left:.2rem;
+        }
+        .guanbi{
+            width: .5rem;
+            height: .5rem;
+            background-color: pink;
+            position: absolute;
+            color:#fff;
+            top:0;
+            right:0;
+            text-align: center;
+            line-height: .5rem;
+        }
+        .content ul li .active{
+            color:orangered;
+        }
+        .active{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="btnbox">
+        <div class="wait active">未完成</div>
+        <div class="done">已完成</div>
+    </div>
+    <div class="content">
+        <ul>
+            <li>
+                <time>2017-11-02 16:00:00</time>
+                <p>今天的作业是xx</p>
+                <i>0</i>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="mask">
+    <div class="item">
+        <div class="guanbi">X</div>
+        <div class="box">
+            <div class="shijian">2017-11-03</div>
+            <div class="riqi">09-10-38</div>
+        </div>
+        <!--<div class="guanbi">aaaaaaaaaaa</div>-->
+        <textarea name="" id="wenzi" cols="30" rows="10"></textarea>
+    </div>
+    <div id="editarea">
+        <p class="close">X</p>
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <input type="button" value="提交" id="submit">
+    </div>
+</div>
+<div id="add">添加</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/hammer.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/rem.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+//        direction: 'vertical',
+        loop: true,
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+    })
+    var myIScroll = new IScroll('.content', {
+        fadeScrollbars:true,
+        scrollbars: true,
+        mouseWheel: true,
+    })
+    var state = "wait";
+    // 点击切换按钮
+    $(".btnbox div")
+            .click(function () {
+                $(".btnbox div").removeClass("active")
+                        .filter(this).addClass("active")
+                if ($(".wait").hasClass("active")) {
+                    state = "wait";
+                } else {
+                    state = "done"
+                }
+                rewirte()
+            })
+    $("#add").click(function () {
+        $(".main").css("filter", "blur(2px)")
+        $(".mask").show().find("#editarea")
+                .delay(500)
+                .queue(function () {
+                    $(this).addClass("show").dequeue();
+                    $("#text")[0].focus();
+                })
+    })
+    //    关闭
+    $(".close").click(function () {
+        $(".main").css("filter", "")
+        $(".mask").hide().find("#editarea").removeClass("show")
+        $("#text").val("");
+    })
+
+
+    function getData() {
+        return localStorage.todu ? JSON.parse(localStorage.todu) : []
+    }
+    function saveData(data) {
+        localStorage.todu = JSON.stringify(data)
+    }
+
+    $("#submit").click(function () {
+        var text = $("#text").val();
+        if (text === "") {
+            return;
+        }
+        $("#text").val("");
+        var time = new Date().getTime();
+        var color = getColor()
+        var data = getData()
+        data.push({con: text, time, isStart: 0, isDone: 0, color})
+        saveData(data);
+        rewirte()
+        $("#editarea").removeClass("show")
+                .parent()
+                .hide()
+                .prev()
+                .css("fliter", "")
+    })
+    //0,3,6,9,c
+    var colorArr = [0, 3, 6, 9, "c", "f"]
+    function getColor() {
+        var str = "#"
+        for (var i = 0; i < 3; i++) {
+            var pos = Math.floor(Math.random() * colorArr.length)
+            str += colorArr[pos]
+        }
+        return str
+    }
+//    重绘函数
+    function rewirte() {
+        var data = getData()
+        $(".content ul").empty();
+        data.reverse();//将内容顺序颠倒 新添加的再最前面
+        var str = "";
+
+        $(data).each(function (index, val) {
+            if (state == "wait") {
+                if (val.isDone === 0) {
+                    var className = val.isStart ? 'active' : '';//给星星加颜色
+
+                    str += "<li id=" + index + " style='background:" + val.color + " '><time>" + getDate(val.time) + "<span>" + getTime(val.time) + "</span></time><p>" + val.con + "</p><i class='iconfont'>&#xe649;</i><div class='right'>完成</div></li>"
+
+                }
+            } else if (state == "done") {
+                if (val.isDone == 1) {
+                    str += "<li id=" + index + " style='background:#ccc'><time><span>" + getDate(val.time) + "</span><span>" + getTime(val.time) + "</span></time><p>" + val.con + "</p><i>0</i><div class='del'>删除</div></li>"
+                }
+            }
+
+        })
+        $(".content ul").html(str)
+        addEvent();
+        myIScroll.refresh()
+    }
+    rewirte()
+//    获取日期
+    function getDate(ms) {
+        var date = new Date()
+        date.setTime(ms);
+        var year = addZero(date.getFullYear())
+        var mounth = addZero(date.getMonth() + 1)
+        var day = addZero(date.getDate())
+        return year + "-" + mounth + "-" + day
+    }
+    //拼接0
+    function addZero(num) {
+        return num < 10 ? "0" + num : num;
+    }
+//    设置时间
+    function getTime(ms) {
+        var date = new Date()
+        date.setTime(ms)
+        var h = addZero(date.getHours())
+        var m = addZero(date.getMinutes())
+        var s = addZero(date.getSeconds())
+        return h + "-" + m + "-" + s
+    }
+
+    var max = $(window).width() / 750 * 100 * 2.5
+    //    function addEvent(){
+    //        var lis=$(".content ul li")
+    //        $.each(function(index,ele){
+    //            var hammer=new Hammer(ele);
+    //            var sx,mx;
+    //            var state=start;
+    //            hammer.on(".panstart",function(e){
+    //                $(ele).css("transition","none")
+    //
+    //                sx=e.srcEvent.clientX;
+    //            })
+    //            hammer.on("pan",function(e){
+    //                var cx=e.srcEvent.clientX;
+    //                mx=cx-sx;
+    //                if(state==="start"){
+    //                    if(mx>0){
+    //                        return;
+    //                    }
+    //                }else{
+    //                    if(mx<0){
+    //                        return
+    //                    }
+    //                }
+
+    //                $(ele).css("tranform","translate3d("+mx+"px,0,0)")
+    //            })
+    //            hammer.on("panend",function(){
+    //                $(ele).css("transition","all .5s")
+    //
+    //                if(Math.abs(mx)>max/2){
+    //
+    //                    $(ele).css("tranform","translate3d("+(-mx)+"px,0,0)")
+    //
+    //                }else{
+    //                    $(ele).css("tranform","translate3d(0,0,0)")
+    //
+    //                }
+    //            })
+    //        })
+    //    }
+//    拖拽滑动
+    function addEvent() {
+        $(".content ul li").each(function (index, ele) {
+            var hammer = new Hammer(ele);
+            var mx;
+            var state = "start";
+//            开始拖动
+            hammer.on("parstart", function () {
+//                开始去除过渡
+                $(ele).css("transition", "none")
+            })
+            //正常拖动
+            hammer.on("pan", function (e) {
+                mx = e.deltaX;//拖动的距离
+                if (state === "start") {
+                    if (mx > 0) {
+                        return
+                    }
+                }
+                if (state === "end") {
+                    if (mx < 0) {
+                        return;
+                    }
+                    mx =mx-max;//mx-max
+                }
+
+                if (Math.abs(mx) > max) {
+                    return
+                }
+                $(ele).css("transform", "translate3d(" + mx + "px,0,0)")
+            })
+            hammer.on("panend", function () {
+                $(ele).css("transition", "all .5s")
+                if (Math.abs(mx) > max / 2) {
+                    $(ele).css('transform', 'translate3d(-' + max + 'px,0,0)');
+                    state = "end";
+                } else {
+                    $(ele).css('transform', 'translate3d(0,0,0)');
+                    state = 'start';
+                }
+
+            })
+
+        })
+    }
+    $(".content").on("click", ".right", function () {
+        var data = getData()
+        var index = $(this).parent().attr("id");
+        data.reverse();
+//        console.log(data[index])
+        data[index].isDone = 1;
+//        data[index].isDone=1;
+        data.reverse();
+        saveData(data);
+        rewirte();
+    })
+        $(".content").on("click",".iconfont",function(){
+            var data=getData()
+            data.reverse();
+            var index=$(this).parent().attr("id");
+            data[index].isStar=data[index].isStart==1?0:1;
+            data.reverse();
+            saveData(data);
+
+            rewirte();
+        })
+
+    //------------删除-------------------------
+    $('.content').on('click', '.del', function () {
+        console.log(1)
+        var data = getData();
+        var index = $(this).parent().attr('id');
+        data.reverse();
+        data.splice(index, 1)//删除
+        saveData(data);
+        rewirte();
+    })
+    //--------清空--------------------------
+    // function clear() {
+    //     var data = getData();
+    //     data = $.grep(data, function (ele, index) {
+    //         return ele.isDone === 0;
+    //     })
+    //     saveData(data);
+    //     reWrite()
+    // }
+    //---省略号内容-----------------------
+    $('.content').on('click', 'p', function () {
+        var text = $(this).html();
+        $('.main').css('filter', 'blur(2px)');
+        $('.mask')
+                .show()
+                .find('.item')
+                .delay(500)
+                .queue(function () {
+                    $(this)
+                    .addClass('show')
+                    .dequeue();
+                    $('#wenzi').val(text);
+                })
+    })
+    // 最后写一个关闭  和close 一样
+    $(".item").on("click",".guanbi",function(){
+        $(".main").css("filter", "")
+        $(".mask").hide().find(".item").removeClass("show")
+        $("#wenzi").val("");
+
+    })
+
+</script>
+</html>

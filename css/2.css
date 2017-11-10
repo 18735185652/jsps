@@ -1,0 +1,552 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.section {
+    text-align: center;
+    font: 50px "Microsoft Yahei";
+    color: #fff;
+}
+.nav {
+    width: 100%;
+    height: 60px;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.item{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+.nav ul li {
+    margin: 0 30px;
+    color: #fff;
+    line-height: 60px;
+}
+
+.nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+.right-bottom .top{
+    border:1px solid #fff;
+    margin-bottom:30px;
+    display: none;
+}
+.right-bottom{
+    width: 600px;
+    height: 500px;
+    position: absolute;
+    top: 150px;
+    right: 150px;
+    /*animation: rightIn 1s;*/
+}
+.right-bottom .right-text{
+    text-indent: 30px;
+    font-size: 18px;
+    text-align: left;
+    line-height: 30px;
+    opacity: 0;
+}
+
+.two .left{
+    width: 500px;
+    height: auto;
+    background-color:rgba(255,255,255,.2);
+    position: absolute;
+    top:100px;
+    left:200px;
+    z-index: 1;
+    display: none;
+}
+.left-top{
+    width: 100%;
+    height: 300px;
+    background-color: red;
+    background:url("../img/timg.gif");
+    background-size:cover;
+
+}
+.two .left p{
+    margin-top:50px;
+    width: 100%;
+    height: 50px;
+    background-color:#000;
+    color:#fff;
+    display: none;
+    text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+}
+.two .left-bottom{
+    margin-top:20px;
+    width: 100%;
+    height: 130px;
+    /*background-color: pink;*/
+    display: flex;
+    justify-content: space-around;
+
+}
+.two .left-bottom li{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    display: block;
+    opacity: 0;
+}
+.two .left-bottom li img{
+    width: 100%;
+    height: 100%;
+}
+
+.leftIn {
+    animation: leftin 1s;
+    display: block!important;
+}
+
+@keyframes leftin {
+    0% {
+        transform: translateX(-300px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes rightIn {
+    0% {
+        transform: translateX(800px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.rightIn {
+    animation: rightIn 1s;
+    display: block!important;
+}
+
+
+
+.navmask {
+    width: 1200px;
+    height: 100%;
+    /*background-color: red;*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin: auto;
+}
+
+.nav-mask {
+    width: 60px;
+    height: 40px;
+    position: absolute;
+    top: 8px;
+    left: 320px;
+    /*background-color: yellow;*/
+    z-index: -1;
+    border: 1px solid #fff;
+    border-radius: 10px;
+
+}
+.three{
+    background:url("../bg/5.jpg");
+    background-size:cover;
+}
+.three .containers {
+    width: 1000px;
+    height: 500px;
+    /*background-color:purple;*/
+    /*border: 1px solid red;*/
+    display: flex;
+    justify-content: space-between;
+    margin: 100px auto;
+    z-index: 999;
+}
+.three .containers .zhangwo{
+    font-size: 30px;
+}
+.jineng{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 25px;
+}
+.jineng li{
+    width: 200px;
+    transition: all 1s;
+    /*opacity: 0;*/
+    display: none;
+}
+
+#canvas1 {
+    width: 300px;
+    height: 300px;
+}
+
+#canvas2 {
+    width: 300px;
+    height: 300px;
+}
+
+#canvas3 {
+    width: 300px;
+    height: 300px;
+}
+
+/*canvas{*/
+/*background-color:#ccc;*/
+/*}*/
+.fourbox>p {
+    text-align: center;
+    /*margin-top:50px;*/
+    width: 200px;
+    height: 50px;
+    background-color: red;
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+.four {
+    width: 1000px;
+    height: 500px;
+    border: 1px solid red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: yellow;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+.four li {
+    width: 240px;
+    height: 240px;
+    background-color: red;
+}
+.four li .mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .9);
+    opacity: 0;
+    transition: all .5s;
+    text-align: center;
+    line-height: 240px;
+    color: #fff;
+    font-size: 30px;
+}
+.four li .mask:hover {
+    opacity: 1;
+}
+
+#container .item{
+    background:url("../bg/1.jpg");
+    background-size:cover;
+}
+.item .logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid red;
+    position: absolute;
+    background:url("../bg/logo.jpg");
+    background-size:cover;
+    top: 200px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    box-shadow: 0px 0px 0px 5px #7F9B71, 0 0 0 5px #4B8E8D, 0 0 0 10px #A41A08;
+}
+#container .item-text {
+    font-size: 35px;
+    width: 100%;
+    height: 100px;
+    /*background-color: red;*/
+    position: absolute;
+    top: 450px;
+}
+
+#container .item-text p {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    color: green;
+    font-family: '微软雅黑';
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(0, 0, 180, 1)), to(rgba(255, 51, 51, 1)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+
+}
+#container .item-text h4{
+    position: absolute;
+
+    top: 50px;
+    width: 100%;
+    left: 0px;
+    opacity: 0;
+    font-weight: normal;
+    text-align: center;
+    z-index: 999;
+}
+
+body > .section:nth-child(2) {
+    /*background: url("img/1.jpg");*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.box {
+    width: 500px;
+    height: 260px;
+    perspective: 1000px;
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /*margin:auto;*/
+}
+
+.bigbox {
+    width: 500px;
+    height: 260px;
+    position: relative;
+    transform-origin: center center -700px; /* 设置旋转的中心点*/
+    transform-style: preserve-3D; /*子元素为3d模式*/
+    float: left;
+    /*-webkit-animation: slide 18s linear infinite;*/
+    /*margin-right: 60px;*/
+    transition: all 1s;
+
+
+}
+
+.bigbox li {
+    width: 500px;
+    height: 260px;
+    /*background-color: red;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+    line-height: 200px;
+    transform-origin: center center -700px; /* 设置旋转的中心点*/
+    transition: all .3s;
+    -webkit-box-reflect:below 0 -webkit-linear-gradient(transparent,transparent 50%,rgba(255,255,255,.3));
+    font:bold 100px/1.231 georgia,sans-serif;
+}
+.bigbox li a{
+    display: block;
+    width:100%;
+    height:100%;
+}
+.bigbox li img{
+    width: 100%;
+    height: 100%;
+}
+
+.bigbox li:nth-child(1) {
+    transform: rotateY(0deg);
+    background-color: red;
+}
+
+.bigbox li:nth-child(2) {
+    transform: rotateY(45deg);
+    background-color: yellow;
+}
+
+.bigbox li:nth-child(3) {
+    transform: rotateY(90deg);
+    background-color: green;
+
+}
+
+.bigbox li:nth-child(4) {
+    transform: rotateY(135deg);
+    background-color: blue;
+}
+
+.bigbox li:nth-child(5) {
+    transform: rotateY(180deg);
+    background-color: pink;
+}
+
+.bigbox li:nth-child(6) {
+    transform: rotateY(225deg);
+    background-color: purple;
+}
+
+.bigbox li:nth-child(7) {
+    transform: rotateY(270deg);
+    background-color: purple;
+}
+
+.bigbox li:nth-child(8) {
+    transform: rotateY(315deg);
+    background-color: purple;
+}
+/*.bigbox li:hover{*/
+/*transform-origin:200,200; !* 设置旋转的中心点*!*/
+
+/*transform:scale(1.5,1.5)*/
+/*}*/
+
+@-webkit-keyframes slide {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+.fourbox{
+    background:url("../bg/7.jpg");
+    background-size:cover;
+}
+/*照片墙*/
+.photo-box {
+    width: 630px;
+    height: 630px;
+    /*background-color: red;*/
+    margin: 80px 200px;
+    position: relative;
+}
+
+.photo-box li {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+    float: left;
+    margin: 0 10px 10px 0;
+    opacity: 1;
+}
+
+.photo-box li img {
+    width: 100%;
+    height: 100%;
+}
+
+#four {
+    width: 100%;
+    height: 100%;
+    background: url("../bg/6.jpg");
+    background-size:contain;
+    overflow: hidden;
+}
+.xin{
+    position:fixed;
+    bottom:50px;
+    left:60px;
+    opacity:0;
+    -webkit-animation:xin 8s linear infinite;
+    animation:xin 8s linear infinite;
+}
+@-webkit-keyframes xin{
+    0%{opacity:1;}/*从什么时候开始*/
+    20%{bottom:300px; left:300px;opacity:0;}
+    40%{bottom:460px; left:680px;opacity:1;}
+    60%{bottom:300px; left:900px;opacity:0;}
+    80%{bottom:50px; left:1100px;opacity:1;}
+    100%{bottom:-150px; left:760px;opacity:0;}
+} @keyframes xin{
+      0%{opacity:1;}/*从什么时候开始*/
+      20%{bottom:300px; left:300px;opacity:0;}
+      40%{bottom:460px; left:680px;opacity:1;}
+      60%{bottom:300px; left:900px;opacity:0;}
+      80%{bottom:50px; left:1100px;opacity:1;}
+      100%{bottom:-150px; left:760px;opacity:0;}
+  }
+.textitem-top {
+    width: 600px;
+    height: 500px;
+    /*border: 2px solid #fff;*/
+    position: absolute;
+    top: 100px;
+    right: 150px;
+    z-index: 999;
+
+}
+.textitem-top .zuoping {
+    /*position: absolute;*/
+    padding-top:20px;
+    width: 100%;
+    height: 50px;
+    /*background-color: red;*/
+    text-align: center;
+    font-size: 30px;
+    color:#fff;
+    transition: all 1s;
+}
+.textitem-top .line{
+    border:1px solid #fff;
+    margin-top:20px;
+
+}
+
+.textitem-top ul li{
+    width: 100%;
+    height:auto;
+    margin:25px;
+    opacity: 0;
+    overflow: hidden;
+}
+.textitem-top ul .lineleft{
+    margin-left:-500px;
+}
+.textitem-top ul .lineright{
+    margin-left:1500px;
+}
+.click{
+    width: 150px;
+    height: 60px;
+    font-size: 25px;
+    color:#fff;
+    cursor: pointer;
+    line-height: 60px;
+    background-color:rgba(0,0,0,.8);
+    margin:0 auto;
+}
+.textitem-top ul li span{
+    font-size: 25px;
+    color:#fff;
+    display: block;
+    width: 130px;
+    height: 50px;
+    /*background-color:red;*/
+    float:left;
+}
+.textitem-top ul li p{
+    width: 468px;
+    height:150px;
+    /*background-color: yellow;*/
+    /*background-color: none;*/
+    float:left;
+    font-size: 25px;
+    text-align: left;
+}

@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/jquery.fullPage.css">
+    <link rel="stylesheet" type="text/css" href="css/crowd.css">
+    <link rel="stylesheet" href="css/2.css">
+</head>
+<body>
+<div class="nav">
+    <ul>
+        <li data-menuanchor="p1"><a href="#p1">首页</a></li>
+        <li data-menuanchor="p2"><a href="#p2 ">自我介绍</a></li>
+        <li data-menuanchor="p3"><a href="#p3">技能介绍</a></li>
+        <li data-menuanchor="p4"><a href="#p4">项目介绍</a></li>
+        <li data-menuanchor="p5"><a href="#p5">项目经验</a></li>
+    </ul>
+    <div class="navmask">
+        <div class="nav-mask"></div>
+    </div>
+</div>
+<div id="container">
+    <div class="section item">
+        <div class="logo">
+        </div>
+        <div class="item-text">
+            <p>一名前端工程师的介绍</p>
+            <h4>奋斗不息 前端不止</h4>
+        </div>
+    </div>
+    <div class="section two">
+         <div class="left">
+                <div class="left-top">
+                </div>
+                <p>About Me</p>
+             <ul class="left-bottom">
+                 <li><img src="img/css.jpg" alt=""></li>
+                 <li><img src="img/js.jpg" alt=""></li>
+                 <li><img src="img/jq.jpg" alt=""></li>
+             </ul>
+         </div>
+        <div class="right-bottom">
+            <div class="toptext">About Me</div>
+            <div class="top"></div>
+            <div class="right-text">
+            </div>
+        </div>
+        <!--<div class="right-item"></div>-->
+        <div class="bg" style="width:100%;height:100%;">
+            <canvas id="display" width="800" height="500"></canvas>
+            <div id="blachole"></div>
+        </div>
+    </div>
+    <div class="section three">
+        <div class="containers">
+            <div class="zhangwo">技能掌握</div>
+            <canvas width="200" height="200" id="canvas1"></canvas>
+            <canvas width="200" height="200" id="canvas2"></canvas>
+            <canvas width="200" height="200" id="canvas3"></canvas>
+            <ul class="jineng">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="section" id="four">
+        <div class="box">
+            <ul class="bigbox">
+                <li><a href="xiaomi1/mi.html" target="_blank"><img src="img/mi.jpg" alt=""></a></li>
+                <li><a href="tianmao/tianmao.html" target="_blank"><img src="img/cat.jpg" alt=""></a></li>
+                <li><a href="yidong/yidong.html" target="_blank"><img src="img/yidong.jpg" alt=""></a></li>
+                <li><a href="game/chress.html" target="_blank"><img src="img/wuziqi.jpg" alt=""></a></li>
+                <li><a href="game/type/type1.html" target="_blank"><img src="img/type.jpg" alt=""></a></li>
+                <li><a href="todo/todolist.html" target="_blank"><img src="img/todolist.jpg" alt=""></a></li>
+                <li><a href="qiye/shouye.html" target="_blank"><img src="img/node.jpg" alt=""></a></li>
+                <li><a href="#" target="_blank"><img src="img/bg.jpg" alt=""></a></li>
+            </ul>
+            <div class="xin">
+                <img src="img/xin.png"/>
+            </div> <div class="xin">
+            <img src="img/xin.png"/>
+        </div> <div class="xin">
+            <img src="img/xin.png"/>
+        </div>
+        </div>
+
+    </div>
+    <div class="section fourbox">
+        <!--<p>作品展示</p>-->
+        <ul class="photo-box">
+            <li><img src="img/css.jpg" alt=""></li>
+            <li><img src="img/js.jpg" alt=""></li>
+            <li><img src="img/jq.jpg" alt=""></li>
+            <li><img src="img/php.jpg" alt=""></li>
+            <li><img src="img/ajax.jpg" alt=""></li>
+            <li><img src="img/node.jpg" alt=""></li>
+            <li><img src="img/rector.jpg" alt=""></li>
+            <li><img src="img/vue.jpg" alt=""></li>
+            <li><img src="img/ps.jpg" alt=""></li>
+        </ul>
+        <div class="btn"></div>
+        <div class="textitem-top">
+            <div class="zuoping">项目介绍</div>
+            <div class="line"></div>
+
+            <ul>
+                <li class=lineleft>
+                    <span>项目经验:</span>
+                    <p class="xiangmu">
+                        整个项目过程中遇到的难题整个项目过程中遇到的难题整个项目过程中遇到的难题整个项目过程中遇到的难题
+                    </p>
+                </li>
+                <li class="lineright">
+                    <span>项目技术:</span>
+                    <p>
+                        整个项目过程中遇到的难题整个项目过程中遇到的难题整个项目过程中遇到的难题整个项目过程中遇到的难题
+                    </p>
+                </li>
+                <div class="click">点我试试</div>
+            </ul>
+        </div>
+        <div class="textitem-bottom"></div>
+
+    </div>
+</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/move.js"></script>
+<script type="text/javascript" src="js/constellation.js"></script>
+<script src="js/jquery.fullPage.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script>
+    $(function () {
+        $('#container').fullpage({
+            sectionsColor: ['#1bbc9b', '#000', '#7BAABE', '#000', '#f90'],
+//        loopBottom: true,
+            'navigation': true,//是否显示项目导航
+            navigationTooltips: true,    //数组	空	项目导航的 tip
+            navigation: ["第一页", "第二页", "第三页", "第四页","第五页"],
+            anchors: ["p1", "p2", "p3", "p4","p5"],
+            verticalCentered: true,
+            menu: ".nav",
+            controlArrowColor: "red",
+            continuousVertical: true,
+            afterLoad: function (anchon, index) {
+                if (index == 1) {
+                    $(".item-text p").animate({
+//                    left: [600, 'swing'],
+                        top: [0, 'easeOutExpo']
+                    });
+                    $(".item-text h4").delay(400).animate({
+                        opacity:1
+                    },2000);
+
+                }
+                else if (index == 2) {
+                    $(".left").addClass("leftIn")
+//                    $(".right-item").addClass("rightIn")
+                    typing();
+
+                    $(".left p").addClass("leftIn")
+                    $(".left-bottom li").each(function (index, ele) {
+                        $(ele).delay(index * 500).animate({
+                            opacity: 1, marginLeft:0,
+                        })
+                    })
+                    $(".right-bottom .toptext ").addClass("rightIn")
+                    $(".right-bottom .top").addClass("leftIn")
+
+                    $(".right-text").delay(1000).animate({opacity:1})
+
+                } else if (index == 3) {
+                    $(".containers").css("display", "block")
+                    $(".jineng li").each(function(index,ele){
+                        $(ele).delay(2000).addClass("leftIn")
+                    })
+                    function fn(canvas, color, max) {
+                        let cobj = canvas.getContext("2d")
+                        cobj.save();
+                        cobj.translate(100, 100)
+                        cobj.lineWidth = 20
+                        cobj.strokeStyle = color
+                        cobj.lineCap = "round"
+                        cobj.textAlign = "center"
+                        cobj.textBaseline = "middle"
+                        cobj.font = "20px 微软雅黑"
+                        cobj.fillStyle = "#fff";
+                        let num = 0;
+
+                        function progress() {
+                            num++;
+                            let angle = num * Math.PI / 50;
+                            cobj.clearRect(-100, -100, 200, 200)
+                            cobj.save()
+                            cobj.rotate(-Math.PI / 2)
+                            cobj.beginPath();
+                            cobj.arc(0, 0, 70, 0, angle)
+                            cobj.stroke()
+                            cobj.restore()
+                            cobj.fillText(num + "%", 0, 0);
+                            if (num < max) {
+                                requestAnimationFrame(progress);
+                            } else {
+                                cobj.restore()
+                            }
+                        }
+                        progress()
+                    }
+
+                    let can1 = document.querySelector('#canvas1');
+                    let can2 = document.querySelector('#canvas2');
+                    let can3 = document.querySelector('#canvas3');
+                    fn(can1, "red", 80);
+                    fn(can2, "pink", 90);
+                    fn(can3, "blue", 90);
+                }
+                if(index==5){
+                    $(".lineleft").animate({marginLeft:0,opacity:1})
+                    $(".lineright").animate({marginLeft:0,opacity:1})
+                }
+            },
+            onLeave: function (index) {
+                setTimeout(function () {
+                    if (index == 1) {
+                        $(".item-text p").delay(200).animate({
+                            top: [-1000, '']
+                        });
+                        $(".item-text h4").delay(400).animate({
+                            opacity:0
+                        });
+                    }
+                    if (index === 2) {
+                        $(".left").delay(200).removeClass("leftIn")
+//                        $(".right-item").delay(200).removeClass("rightIn")
+                        $(".right-text").html("");
+                        $(".left-bottom li").each(function (index, ele) {
+                            $(ele).delay(index*300).animate({opacity:1})
+                        })
+
+//                    $(".right-item").addClass("rightIn")
+                        $(".left p").removeClass("leftIn")
+                        $(".left-bottom li").each(function (index, ele) {
+                            $(ele).delay(200).animate({
+                                opacity: 0, marginLeft: 0,
+                            })
+                        })
+                        $(".right-bottom .toptext ").removeClass("rightIn")
+                        $(".right-bottom .top").removeClass("leftIn")
+
+                        $(".right-text").delay(200).animate({opacity:0})
+
+                    }
+                    if (index == 3) {
+                        $(".containers").css("display", "none")
+                        $(".jineng li").each(function(index,ele){
+                            $(ele).delay(200).removeClass("leftIn")
+                        })
+                    }
+
+                    if(index==5){
+                        $(".lineleft").delay(200).animate({marginLeft:-500,opacity:0})
+                        $(".lineright").delay(200).animate({marginLeft:1500,opacity:0})
+                    }
+
+
+
+                }, 200)
+            }
+        });
+    });
+
+
+    //导航
+    var $nav = $(".nav");
+    var $li = $nav.find("ul li")
+    var $border = $nav.find(".navmask .nav-mask")
+
+    var sw = $border.width();
+    var sl = $border.position().left;
+    var w = sw - $li.outerWidth();
+    var l = sl - $li.position().left;
+    $li.mouseenter(function () {
+        var width = $(this).outerWidth() + w;
+        var left = $(this).position().left + l;
+        $border.stop().animate({
+            width: width,
+            left: left,
+        })
+        $nav.mouseleave(function () {
+            $border.stop().animate({
+                width: sw,
+                left: sl,
+            })
+        })
+    })
+    //导航结束
+    let containers = document.querySelector(".containers")
+    let canvas1 = document.querySelector("#canvas1")
+    let canvas2 = document.querySelector("#canvas2")
+    let canvas3 = document.querySelector("#canvas3")
+    let cobj1 = canvas1.getContext("2d")
+    let cobj2 = canvas2.getContext("2d")
+    let cobj3 = canvas3.getContext("2d")
+    let flag = true;
+    function circle(canvas, max, color) {
+//       let canvas=document.querySelector("canvas");
+        let cobj = canvas.getContext("2d");
+        cobj.save();
+        cobj.translate(100, 100);
+        cobj.lineWidth = 20;
+        cobj.textAlign = "center";
+        cobj.textBaseline = "middle";
+        cobj.lineCap = "round";
+        cobj.strokeStyle = color;
+        cobj.font = "20px 微软雅黑";
+        let num = 0;
+        function fn() {
+            num++;
+            cobj.clearRect(-100, -100, 200, 200)
+            cobj.save()
+            cobj.rotate(-Math.PI / 2)
+            let angel = num * Math.PI / 50
+            cobj.beginPath();
+            cobj.arc(0, 0, 70, 0, angel)
+            cobj.stroke()
+            cobj.restore()
+            cobj.fillText(num + "%", 0, 0)
+            if (num < max) {
+                requestAnimationFrame(fn)
+            } else {
+                cobj.restore()
+            }
+        }
+        fn()
+    }
+    window.addEventListener("scroll", function () {
+        let obj = document.body.scrollTop == 0 ? document.documentElement : document.body;
+        let st = obj.scrollTop;
+        if (st > 400 && flag) {
+            circle(canvas1, 80, "red")
+            circle(canvas2, 78, "yellow")
+            circle(canvas3, 66, "green")
+            flag = false
+        }
+        if (st < containers.offsetTop - window.innerHeight) {
+            flag = true
+            cobj1.clearRect(0, 0, 200, 200)
+            cobj2.clearRect(0, 0, 200, 200)
+            cobj3.clearRect(0, 0, 200, 200)
+        }
+    })
+    //第一屏开始
+    //$(".section h3").animate({
+    //    left: [500, 'swing'],
+    //    top: [200, 'easeOutBounce']
+    //});
+
+
+    //    照片墙
+    var lis = document.querySelectorAll(".photo-box li")
+    var index = 2;
+    var arr = [];
+    for (var i = 0; i < lis.length; i++) {
+        arr.push([lis[i].offsetLeft, lis[i].offsetTop])
+    }
+    //console.log(arr)
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].style.position = "absolute";
+        lis[i].style.left = arr[i][0] + "px"
+        lis[i].style.top = arr[i][1] + "px"
+        lis[i].style.margin = 0;
+    }
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].index = i;
+        drag(lis[i])
+    }
+
+var oInput=document.querySelector(".click")
+//    点击随机切换
+    oInput.onclick = function(){
+        var randomArr = [0,1,2,3,4,5,6,7,8];
+        randomArr.sort(function(n1,n2){
+            return Math.random() - 0.5;
+        });
+        for(var i=0;i<lis.length;i++){
+            startMove( lis[i] , { left : arr[randomArr[i]][0] , top : arr[randomArr[i]][1] } );
+            lis[i].index = randomArr[i];
+        }
+    };
+    function drag(obj) {
+        var disX = 0;
+        var disY = 0;
+        obj.onmousedown = function (e) {
+            obj.style.zIndex = index++;
+            disX = e.clientX - obj.offsetLeft;
+            disY = e.clientY - obj.offsetTop;
+            document.onmousemove = function (e) {
+                obj.style.left = e.clientX - disX + "px"
+                obj.style.top = e.clientY - disY + "px"
+                for (var i = 0; i < lis.length; i++) {
+                    lis[i].style.border = "";
+                }
+                var nL = nearLi(obj)
+                if (nL) {
+                    nL.style.border = "3px solid yellow"
+                }
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmousedown = null;
+                var nL = nearLi(obj);
+                var tmp = 0;
+                if (nL) {
+                    startMove(nL, {left: arr[obj.index][0], top: arr[obj.index][1]})
+                    startMove(obj, {left: arr[nL.index][0], top: arr[nL.index][1]})
+                    nL.style.border = "";
+                    tmp = obj.index;
+                    obj.index = nL.index;
+                    nL.index = tmp;
+                } else {
+                    startMove(obj, {left: arr[obj.index][0], top: arr[obj.index][1]})
+                }
+            }
+            return false;
+        }
+    }
+    function nearLi(obj) {
+        var value = 9999;
+        var index = -1;
+        for (var i = 0; i < lis.length; i++) {
+            if (PZ(obj, lis[i]) && obj != lis[i]) {
+                var c = jl(obj, lis[i]);
+                if (c < value) {
+                    value = c;
+                    index = i;
+                }
+            }
+        }
+        if (index != -1) {
+            return lis[index]
+        } else {
+            return false;
+        }
+    }
+
+    function jl(obj1, obj2) {
+        var a = obj1.offsetLeft - obj2.offsetLeft;
+        var b = obj1.offsetTop - obj2.offsetTop;
+        return Math.sqrt(a * a + b * b)
+    }
+
+    function PZ(obj1, obj2) {
+        var L1 = obj1.offsetLeft;
+        var R1 = obj1.offsetLeft + obj1.offsetWidth;
+        var T1 = obj1.offsetTop;
+        var B1 = obj1.offsetTop + obj1.offsetHeight;
+
+        var L2 = obj2.offsetLeft;
+        var R2 = obj2.offsetLeft + obj2.offsetWidth;
+        var T2 = obj2.offsetTop;
+        var B2 = obj2.offsetTop + obj2.offsetHeight;
+        if (R1 < L2 || L1 > R2 || B1 < T2 || T1 > B2) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //    六边形动画
+        var itemObj=document.querySelector("#four .bigbox")
+        var itemli=document.querySelectorAll("#four .bigbox li")
+//    console.log(itemli)
+        var angle=0;
+        var st=setInterval(banner,3000)
+        function banner(){
+            angle+=45;
+//            console.log(angle)
+            itemObj.style.transform=`rotateY(${angle}deg)`;
+//            console.log(angle);
+
+
+        }
+        itemli.forEach(function(ele,index){
+            ele.onmouseover=function(){
+//                itemObj.style.transformOrigin="center center"
+                this.style.width="580px"
+                this.style.height="320px"
+                this.style.top="-30px"
+                this.style.left="-30px"
+                this.style.transition="all 1s"
+//                this.style.transform="scale(1.2,1.2)"
+            }
+            ele.onmouseout=function(){
+//                itemObj.style.transformOrigin="center center -500px";
+//                itemli.style.transformOrigin="center center -500px";
+                this.style.transition="all 1s"
+                this.style.width="100%"
+                this.style.height="100%"
+                this.style.top="0px"
+                this.style.left="0px"
+//                this.style.transform="scale(1.0,1.0)"
+            }
+        })
+        itemObj.onmouseover=function(){
+            clearInterval(st)
+        }
+        itemObj.onmouseout=function(){
+            st=setInterval(banner,3000)
+        }
+
+
+//    打字效果
+
+    let stt = '文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍';
+    let j = 0;
+    function typing(){
+        var divTyping = document.querySelector(".right-text");
+        if (j <= stt.length) {
+            divTyping.innerHTML = stt.slice(0, j++) + '_';
+            setTimeout('typing()',50);//递归调用
+        }
+        else{
+            divTyping.innerHTML = stt;//结束打字,移除 _ 光标
+            j=0;
+        }
+    }
+//    typing();
+
+
+
+
+
+</script>
+</html>

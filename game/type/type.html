@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;padding:0;
+        }
+        html,body{
+            height: 100%;
+        }
+        .box{
+            width: 1200px;
+            height: 100%;
+            background-color: #ccc;
+            margin:0 auto;
+            overflow: hidden;
+        }
+        .left{
+            width: 1000px;
+            height: 100%;
+            background-color: darkgreen;
+            float:left;
+            position: relative;
+        }
+        .right{
+            width: 200px;
+            height: 100%;
+            background-color: yellow;
+            float:left;
+        }
+        .divbox{
+            width: 100px;
+            height: 100px;
+            border:2px solid red;
+            font-size: 50px;
+            color:#fff;
+            font-weight: bold;
+            text-align: center;
+            line-height: 100px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="left"></div>
+    <div class="right">
+        <div class="defen">
+            得分 <span>0</span>
+        </div>
+        <div class="guanka">难度 <span>1</span> </div>
+        <div class="life">生命 <span></span> </div>
+        <button class="start">开始</button>
+        <button class="end">结束</button>
+    </div>
+</div>
+
+</body>
+<script>
+    let obj={}
+    let sence=document.querySelector(".left")
+    let count=document.querySelector(".defen span")
+    let start=document.querySelector(".start")
+
+    let nun=3
+    let speed=5;
+    let flag=true;
+    function createFn(){
+        var divobj=document.createElement("div");
+            divobj.className="divbox";
+        var Top=Math.floor(Math.random()*100)
+            divobj.style.top=Top+"px"
+        do{
+            var randomNum=Math.floor(Math.random()*26+65)
+            var str=String.fromCharCode(randomNum);
+            divobj.innerHTML=str;
+        }while(obj[str])
+        do{
+            var topLeft=Math.floor(Math.random()*800)
+            divobj.style.left=topLeft+"px"
+        }while(check(topLeft))
+         obj[str]={left:topLeft,top:Top,ele:divobj}
+            sence.appendChild(divobj)
+    }
+
+    function check(leftTop){
+        for(let i in obj){
+            if(leftTop+100>obj[i].left&&leftTop-100<obj[i].left){
+                return true;
+            }
+        }
+    }
+//    let st=null;
+    let life=document.querySelector(".life span")
+    let lifeNum=5;
+        life.innerHTML=lifeNum;
+    let height=window.innerHeight;
+
+
+
+    var st= setInterval(move,50)
+    function gameStart(){
+        for(let i=0;i<nun;i++){
+            createFn()
+        }
+//        move();
+        st=setInterval(move,50);
+    }
+    function move(){
+        for(let i in obj){
+            var box=obj[i].ele.offsetTop;
+
+            box+=speed;
+            obj[i].ele.style.top=box+"px"
+//            obj[i].top=box
+            if(box>height){
+                lifeNum--;
+                life.innerHTML=lifeNum;
+                sence.removeChild(obj[i].ele)
+                delete obj[i];
+                createFn();
+                //                console.log( life.innerHTML)
+                console.log(lifeNum)
+                if(lifeNum==0){
+                    gameover()
+                }
+            }
+        }
+
+    }
+
+
+    var n=0
+    let nandu=document.querySelector(".guanka span")
+    document.onkeydown=fn2;
+    function fn2(e){
+        let kc=e.keyCode;
+//        console.log(kc)
+        let letterobj=String.fromCharCode(kc)
+        if(obj[letterobj]){
+            sence.removeChild(obj[letterobj].ele)
+            delete obj[letterobj];
+            n++;
+            count.innerHTML=n;
+            createFn();
+            if(count.innerHTML%10==0){
+                fn1();
+            }
+        }
+    }
+
+    function fn1(){
+        nandu.innerHTML++;
+        nun++;
+        if(nun<5){
+            alert(1)
+            createFn();
+        }else{
+            speed++
+            console.log(speed)
+        }
+    }
+//    console.log(count.innerHTML)
+    function gameover(){
+        alert("游戏结束当前得分为"+n+"分")
+        obj={};
+        clearInterval(st);
+        sence.innerHTML="";
+        lifeNum=5;
+        life.innerHTML=lifeNum;
+        count.innerHTML=0;
+
+        speed=5
+        nandu.innerHTML=1;
+        flag=true;
+    }
+start.onclick=function(){
+    if(flag){
+        flag=false;
+        gameStart()
+    }
+
+}
+
+
+</script>
+</html>
